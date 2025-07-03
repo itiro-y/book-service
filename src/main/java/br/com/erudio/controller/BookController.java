@@ -4,6 +4,8 @@ import br.com.erudio.dto.Exchange;
 import br.com.erudio.environment.InstanceInformationService;
 import br.com.erudio.model.Book;
 import br.com.erudio.repository.BookRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.erudio.proxy.ExchangeProxy;
 
+@Tag(name = "Book Endpoint")
 @RestController
 @RequestMapping("book-service")
 public class BookController {
@@ -26,6 +29,7 @@ public class BookController {
     private ExchangeProxy proxy;
 
     // http://localhost:8100/book-service/1/BRL
+    @Operation(summary = "Find a specific book by your ID")
     @GetMapping(value = "/{id}/{currency}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Book findBook(
             @PathVariable("id") Long id,
